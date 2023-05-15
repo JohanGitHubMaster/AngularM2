@@ -1,0 +1,35 @@
+<p>{{titre}}</p>
+
+<h3>Utilisation du *ngif else</h3>
+<div  *ngFor="let assignment of assignements">
+    <p  *ngIf="assignment.rendu else nonrendu"> {{assignment.nom}} est rendu le {{assignment.date}} rendu {{assignment.rendu}}</p>
+    <ng-template #nonrendu>
+         {{assignment.nom}} a rendre le {{assignment.date}} rendu {{assignment.rendu}}
+    </ng-template>
+</div>
+
+<h3>Utilisation du [ngstyle]</h3>
+<div *ngFor="let assignment of assignements">
+    <p  [ngStyle]="{color:assignment.rendu?'green':'red'}"> {{assignment.nom}} date de rendu {{assignment.date}} rendu {{assignment.rendu}}</p>
+</div>
+
+<h3>Utilisation du [ngClass]</h3>
+<div *ngFor="let assignment of assignements">
+    <p  [ngClass]="{'rendu':assignment.rendu, 'nonRendu':!assignment.rendu}"> {{assignment.nom}} date de rendu {{assignment.date}} rendu {{assignment.rendu}}</p>
+</div>
+
+<h3>Utilisation directive avec *ngif</h3>
+<div *ngFor="let assignment of assignements">
+    <p appRendu *ngIf="assignment.rendu; else nonsoumis"> {{assignment.nom}} date de rendu {{assignment.date}} rendu {{assignment.rendu}}</p>
+    <ng-template #nonsoumis>
+        {{assignment.nom}} date limite {{assignment.date}} rendu {{assignment.rendu}}
+    </ng-template>
+</div>
+
+<table>
+    <tr *ngFor="let assignment of assignements">
+        <td>{{assignment.nom}}</td>
+        <td> {{assignment.date}}</td>
+        <td>  {{assignment.rendu}}</td>
+    </tr>
+</table>
