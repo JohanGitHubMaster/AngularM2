@@ -1,7 +1,7 @@
 <p>{{titre}}</p>
 
 
-<app-add-assignment *ngIf="formVisible" (nouvelAssignement)="onNouvelAssignement($event)"></app-add-assignment>
+<app-add-assignment *ngIf="formVisible" (nouvelAssignement)="onNouvelAssignement($event);onNouvelAssignementService($event);"></app-add-assignment>
 
 
 <main *ngIf="!formVisible" class="container">
@@ -44,6 +44,7 @@
     </tr>
 </table>
 <p>
+    
 
 </p>
 <mat-divider></mat-divider>
@@ -90,6 +91,26 @@
 <app-assignment-detail [assignmentDetail]="assingnmentSelectionner" (EventFils)="onDeleteAssignement($event)"></app-assignment-detail>
 
 <p>{{nomDevoir}}</p>
+
+<mat-divider></mat-divider>
+
+<h3>liste assignement via service</h3>
+<mat-list *ngFor="let assignment of assignementsServ">
+    <h3 mat-subheader>{{assignment.datedeRendu | date:'dd/MM/yy'}}</h3> 
+    <mat-list-item (click)="onAssignmentClique(assignment)">
+    <p appRendu *ngIf="assignment.rendu; else nonsoumis">       
+        {{assignment.nom}} rendu {{assignment.rendu}}
+    </p>
+
+    <ng-template #nonsoumis>
+        {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
+    </ng-template>
+        
+    </mat-list-item>
+    <mat-divider></mat-divider>
+</mat-list>
+
+
 </main>
 
 

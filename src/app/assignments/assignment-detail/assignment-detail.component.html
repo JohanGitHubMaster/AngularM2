@@ -4,8 +4,8 @@
       <mat-card-title>{{assignmentDetail.nom}}</mat-card-title>
       <mat-card-subtitle>Date de rendu :{{assignmentDetail.datedeRendu | date:'dd/MM/yy'}}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-actions>
-        <mat-checkbox *ngIf="!assignmentDetail.rendu" [checked]="assignmentDetail.rendu" (click)="assignmentDetail.rendu = true"></mat-checkbox>
+    <mat-card-actions id="bottom">
+        <mat-checkbox *ngIf="!assignmentDetail.rendu" [checked]="assignmentDetail.rendu" (click)="onAssignmentRendu()"></mat-checkbox>
       <button mat-button>EDIT</button>     
       <button mat-button (click)="onDelete()">DELETE</button>
     </mat-card-actions>

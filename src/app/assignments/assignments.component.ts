@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Assignment } from './assignement.model';
+import { AssignementsService } from '../shared/assignements.service';
 
 @Component({
   selector: 'app-assignments',
@@ -32,11 +33,24 @@ export class AssignmentsComponent {
   nomDevoir="";
   dateDeRendu!:Date;
   formVisible=false;
+
+  //pour le service
+  assignementsServ!:Assignment[];
+
   ngOnInit(): void{
     console.log("Composant instancie et rendu html");
     setTimeout(()=>{
       //this.ajoutActive=true;
     },2000)
+    
+    //ajout du service
+    this.assignmentsService.getAssignment().subscribe(assignements=>{
+      this.assignementsServ = assignements;
+    });
+  }
+
+  constructor(private assignmentsService:AssignementsService){
+
   }
 
   onSubmit(event:any){
@@ -65,12 +79,28 @@ export class AssignmentsComponent {
     this.formVisible=false;
   }
 
+  onNouvelAssignementService(assignment: Assignment){
+    this.assignmentsService.addAssignment(assignment).subscribe(result=>{
+      console.log(result);
+    });
+    this.formVisible=false;
+  }
+
+
   onDeleteAssignement(assignment:Assignment){
     console.log("onDeleteAssignement")
-    const index = this.assignements.indexOf(assignment, 0);
-    if (index > -1) {
-      this.assignements.splice(index, 1);
-    }
+    //const index = this.assignements.indexOf(assignment, 0);
+    // const index = this.assignements.indexOf(this.assingnmentSelectionner, 0);
+
+    // if (index > -1) {
+    //   this.assignements.splice(index, 1);
+    //   this.formVisible=false;
+    //   console.log("Suppression fait ");
+    // }
+
+    this.assignmentsService.deleteAssignment(this.assingnmentSelectionner).subscribe(message=>{
+      console.log(message)
+    });
   }
 
 }
