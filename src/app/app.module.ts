@@ -13,11 +13,16 @@ import {MatIconModule} from '@angular/material/icon';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
 import { FormsModule } from '@angular/forms';
+import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component';
+import { MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
     AssignmentsComponent,
-    RenduDirective
+    RenduDirective,
+    AssignmentDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,10 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     FormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatListModule,
+    MatCardModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

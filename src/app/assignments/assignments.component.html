@@ -36,16 +36,34 @@
 <p>
 
 </p>
-<form ngForm #assignmentForm (submit)="onSubmit($event)" class="form">
+
+<h3>Utilisation directive avec *ngif avec MatList</h3>
+<mat-list *ngFor="let assignment of assignements">
+    <h3 mat-subheader>{{assignment.datedeRendu | date:'dd/MM/yy'}}</h3> 
+    <mat-list-item (click)="onAssignmentClique(assignment)">
+    <p appRendu *ngIf="assignment.rendu; else nonsoumis">       
+        {{assignment.nom}} rendu {{assignment.rendu}}
+    </p>
+
+    <ng-template #nonsoumis>
+        {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
+    </ng-template>
+        
+    </mat-list-item>
+    <mat-divider></mat-divider>
+</mat-list>
+<p *ngIf="assingnmentSelectionner">{{assingnmentSelectionner.nom}}</p>
+
+<form ngForm #assignmentForm (submit)="onSubmit($event); assignmentForm.reset()" class="form">
     <mat-form-field>
-        <input matInput [(ngModel)]="nomDevoir" placeholder="" name="nom">
+        <input matInput [(ngModel)]="nomDevoir" placeholder="" name="nom" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>Date de rendu</mat-label>
         <input matInput [matDatepicker]="picker" 
         [(ngModel)]="dateDeRendu"
-        name="date"
+        name="date" required
         >
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -57,5 +75,8 @@
       Ajouter un devoir
     </button>
 </form>
+
+<app-assignment-detail [assignmentDetail]="assingnmentSelectionner"></app-assignment-detail>
+
 <p>{{nomDevoir}}</p>
 

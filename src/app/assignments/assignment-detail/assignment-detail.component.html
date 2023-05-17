@@ -1,0 +1,12 @@
+<p *ngIf="assignmentDetail">details de {{assignmentDetail.nom}}</p>
+<mat-card *ngIf="assignmentDetail">
+    <mat-card-header>
+      <mat-card-title>{{assignmentDetail.nom}}</mat-card-title>
+      <mat-card-subtitle>Date de rendu :{{assignmentDetail.datedeRendu | date:'dd/MM/yy'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+        <mat-checkbox *ngIf="!assignmentDetail.rendu" [checked]="assignmentDetail.rendu" (click)="assignmentDetail.rendu = true"></mat-checkbox>
+      <button mat-button>EDIT</button>
+      <button mat-button>DELETE</button>
+    </mat-card-actions>
+  </mat-card>

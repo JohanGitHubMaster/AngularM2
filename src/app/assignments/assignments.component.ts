@@ -9,6 +9,7 @@ import { Assignment } from './assignement.model';
 export class AssignmentsComponent {
   titre = "Liste des devoirs a rendre";
   c = "orange";
+  assingnmentSelectionner!:Assignment;
   assignements:Assignment[] = [
     {
       nom:"Devoir Angular de Mr Buffa",
@@ -48,4 +49,10 @@ export class AssignmentsComponent {
     this.assignements.push(assignement);
     console.log("date de rendu : "+this.dateDeRendu);
   }
+
+  onAssignmentClique(assignment:Assignment){
+    this.assingnmentSelectionner = assignment;
+    console.log("nom de l'assignement : "+assignment.nom);
+  }
+
 }
