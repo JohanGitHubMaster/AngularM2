@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Assignment } from '../assignement.model';
 
 @Component({
@@ -9,4 +9,12 @@ import { Assignment } from '../assignement.model';
 export class AssignmentDetailComponent {
   @Input()
   assignmentDetail!:Assignment
+
+  @Output()
+  EventFils = new EventEmitter<Assignment>()
+
+  onDelete(){
+    console.log(this.assignmentDetail)
+    this.EventFils.emit(this.assignmentDetail);
+  }
 }

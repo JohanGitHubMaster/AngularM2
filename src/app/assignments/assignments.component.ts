@@ -31,6 +31,7 @@ export class AssignmentsComponent {
   ajoutActive=true;
   nomDevoir="";
   dateDeRendu!:Date;
+  formVisible=false;
   ngOnInit(): void{
     console.log("Composant instancie et rendu html");
     setTimeout(()=>{
@@ -53,6 +54,23 @@ export class AssignmentsComponent {
   onAssignmentClique(assignment:Assignment){
     this.assingnmentSelectionner = assignment;
     console.log("nom de l'assignement : "+assignment.nom);
+  }
+
+  onAddAssignmentBtnClick(){
+    this.formVisible = true;
+  }
+
+  onNouvelAssignement(assignment: Assignment){
+    this.assignements.push(assignment);
+    this.formVisible=false;
+  }
+
+  onDeleteAssignement(assignment:Assignment){
+    console.log("onDeleteAssignement")
+    const index = this.assignements.indexOf(assignment, 0);
+    if (index > -1) {
+      this.assignements.splice(index, 1);
+    }
   }
 
 }
