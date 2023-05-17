@@ -18,6 +18,13 @@ import { MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
+import {Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
+
+const routes : Routes =[
+  {path:'',component:AssignmentsComponent},
+  {path:'home',component:AssignmentsComponent}
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +46,9 @@ import { AddAssignmentComponent } from './assignments/add-assignment/add-assignm
     MatNativeDateModule,
     MatListModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RouterModule.forRoot(routes),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
