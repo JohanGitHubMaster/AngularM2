@@ -1,0 +1,1 @@
+mongodb+srv://rakotovaojohan:johan@cluster0.slaxszh.mongodb.net/assignments?retryWrites=true&w=majority

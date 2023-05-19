@@ -42,12 +42,19 @@ export class AuthService {
     this.loggedIn = true;
   }
 
-  logInUser(user:User){
-    const isUser = this.userList.find(x=>x.nom==user.nom && x.password==x.password);
-    if(isUser)
-    this.loggedUser = true;
-    else
-    this.loggedUser = false;
+  logInUser(user:User):Observable<User|undefined>{
+    const isUser = this.userList.find(x=>x.nom==user.nom && x.password==user.password);
+    if(isUser){
+      console.log(isUser)
+      this.loggedUser = true;
+      this.loggedIn = isUser.roles
+      console.log(isUser.roles);
+    }
+    else{
+      this.loggedUser = false;
+    }
+    
+    return of(isUser);
   }
 
   isUser(){
@@ -60,7 +67,8 @@ export class AuthService {
 
   logOut(){
     this.loggedIn = false;
-    this.router.navigate(["/home"]);
+    this.loggedUser = false;
+    this.router.navigate(["/"]);
   }
 
   isAdmin(){

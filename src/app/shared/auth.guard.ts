@@ -22,6 +22,7 @@ export const authUserGuard: CanActivateFn = (route, state) => {
   let router = inject(Router);
   return inject(AuthService).isUser().then(authentifie=>{
    if(authentifie){
+    alert("bienvenue user");
      return true;
    }
    else{

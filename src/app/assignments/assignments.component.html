@@ -3,7 +3,7 @@
 
 <app-add-assignment *ngIf="formVisible"
     (nouvelAssignement)="onNouvelAssignement($event);onNouvelAssignementService($event);"></app-add-assignment>
-
+    <mat-icon (click)="LogOut()">home</mat-icon>
 
 <main *ngIf="!formVisible" class="container">
     <button mat-flat-button color="accent" class="ajouterBtn" (click)="onAddAssignmentBtnClick()"> Ajouter Assignment

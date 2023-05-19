@@ -1,17 +1,17 @@
-<form #formLogin (submit)="isLogged($event); formLogin.reset()">
+<form #formLogin (submit)="isLogged(); formLogin.reset()">
 <p>
     <mat-form-field appearance="fill">
       <mat-label>Utilisateur</mat-label>
-      <input matInput placeholder="nom" [(ngModel)]="nom">
+      <input matInput placeholder="nom" [(ngModel)]="nom" name="nom">
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="fill">
       <mat-label>Mot de passe</mat-label>
-      <input type="password" matInput placeholder="mot de passe" [(ngModel)]="motdepasse">
+      <input type="password" matInput placeholder="mot de passe" [(ngModel)]="motdepasse" name="motdepasse">
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
   </p>
-  <!-- <button mat-stroked-button>Basic</button> -->
+  <button mat-stroked-button>Basic</button>
   </form>

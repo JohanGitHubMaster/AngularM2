@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Assignment } from './assignement.model';
 import { AssignementsService } from '../shared/assignements.service';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-assignments',
@@ -49,10 +50,11 @@ export class AssignmentsComponent implements OnInit{
     //ajout du service
     this.assignmentsService.getAssignments().subscribe(assignements=>{
       this.assignementsServ = assignements;
+      console.log(assignements)
     });
   }
 
-  constructor(private assignmentsService:AssignementsService){
+  constructor(private assignmentsService:AssignementsService,private authService:AuthService){
 
   }
 
@@ -104,6 +106,11 @@ export class AssignmentsComponent implements OnInit{
     this.assignmentsService.deleteAssignment(this.assingnmentSelectionner).subscribe(message=>{
       console.log(message)
     });
+  }
+
+  LogOut(){
+    console.log("logOut");
+    this.authService.logOut();
   }
 
 }

@@ -24,11 +24,12 @@ import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assi
 import { authGuard, authUserGuard } from './shared/auth.guard';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes : Routes =[
   {path:'home',component:AssignmentsComponent,canActivate:[authUserGuard]},
-  {path:'add',component:AddAssignmentComponent},
-  {path:'assignments/:id',component:AssignmentDetailComponent},
+  {path:'add',component:AddAssignmentComponent,canActivate:[authUserGuard]},
+  {path:'assignments/:id',component:AssignmentDetailComponent,canActivate:[authUserGuard,authGuard]},
   {path:'assignments/edit/:id',component:EditAssignmentComponent,canActivate:[authGuard]},
   {path:'',component:LoginComponent},
 ];
@@ -57,6 +58,7 @@ const routes : Routes =[
     MatCardModule,
     MatCheckboxModule,
     MatSlideToggleModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
 
   ],
