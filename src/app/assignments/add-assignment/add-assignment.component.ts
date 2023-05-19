@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AssignementsService } from 'src/app/shared/assignements.service';
 import { Assignment } from '../assignement.model';
 
 @Component({
@@ -16,6 +18,9 @@ export class AddAssignmentComponent {
   @Output()
   nouvelAssignement = new EventEmitter<Assignment>();
 
+
+  constructor(private assignmentService:AssignementsService,private router:Router){}
+
   onSubmit(event:any){
     //tous ce qu'on peut faire en javascript on peut faire ici
     if(this.nomDevoir==="")return;
@@ -26,7 +31,12 @@ export class AddAssignmentComponent {
     assignement.nom = this.nomDevoir;
     //this.assignements.push(assignement);
 
-    this.nouvelAssignement.emit(assignement);
+    this.assignmentService.addAssignment(assignement).subscribe(message=>{
+      console.log(message);
+      this.router.navigate(["/home"]);
+    });
+
+   // this.nouvelAssignement.emit(assignement);
 
     console.log("date de rendu : "+this.dateDeRendu);
   }

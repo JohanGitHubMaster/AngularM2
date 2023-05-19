@@ -4,4 +4,7 @@
         <a routerLink="/home">{{title}}</a>
     </nav>
 </h1>
-<app-assignments></app-assignments>
+<mat-slide-toggle (click)="login()">Login</mat-slide-toggle>
+<!-- <app-assignments></app-assignments> -->
+
+<router-outlet></router-outlet>

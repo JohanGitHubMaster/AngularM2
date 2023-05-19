@@ -1,116 +1,144 @@
 <p>{{titre}}</p>
 
 
-<app-add-assignment *ngIf="formVisible" (nouvelAssignement)="onNouvelAssignement($event);onNouvelAssignementService($event);"></app-add-assignment>
+<app-add-assignment *ngIf="formVisible"
+    (nouvelAssignement)="onNouvelAssignement($event);onNouvelAssignementService($event);"></app-add-assignment>
 
 
 <main *ngIf="!formVisible" class="container">
-    <button mat-flat-button color="accent" class="ajouterBtn"
-       (click)="onAddAssignmentBtnClick()"
->   Ajouter Assignment
-</button>
+    <button mat-flat-button color="accent" class="ajouterBtn" (click)="onAddAssignmentBtnClick()"> Ajouter Assignment
+    </button>
+
+
+
+    <nav class="ajouterBtn">
+        <a routerLink="/add">
+            <button mat-flat-button color="accent"> Ajouter
+                Assignment par navigation
+            </button>
+        </a>
+    </nav>
+
     <mat-divider></mat-divider>
     <h3>Utilisation du *ngif else</h3>
-<div  *ngFor="let assignment of assignements">
-    <p  *ngIf="assignment.rendu else nonrendu"> {{assignment.nom}} est rendu le {{assignment.datedeRendu}} rendu {{assignment.rendu}}</p>
-    <ng-template #nonrendu>
-         {{assignment.nom}} a rendre le {{assignment.datedeRendu}} rendu {{assignment.rendu}}
-    </ng-template>
-</div>
-<mat-divider></mat-divider>
-<h3>Utilisation du [ngstyle]</h3>
-<div *ngFor="let assignment of assignements">
-    <p  [ngStyle]="{color:assignment.rendu?'green':'red'}"> {{assignment.nom}} date de rendu {{assignment.datedeRendu}} rendu {{assignment.rendu}}</p>
-</div>
-<mat-divider></mat-divider>
-<h3>Utilisation du [ngClass]</h3>
-<div *ngFor="let assignment of assignements">
-    <p  [ngClass]="{'rendu':assignment.rendu, 'nonRendu':!assignment.rendu}"> {{assignment.nom}} date de rendu {{assignment.datedeRendu}} rendu {{assignment.rendu}}</p>
-</div>
-<mat-divider></mat-divider>
-<h3>Utilisation directive avec *ngif</h3>
-<div *ngFor="let assignment of assignements">
-    <p appRendu *ngIf="assignment.rendu; else nonsoumis"> {{assignment.nom}} date de rendu {{assignment.datedeRendu}} rendu {{assignment.rendu}}</p>
-    <ng-template #nonsoumis>
-        {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
-    </ng-template>
-</div>
-
-<table>
-    <tr *ngFor="let assignment of assignements">
-        <td>{{assignment.nom}}</td>
-        <td>{{assignment.datedeRendu}}</td>
-        <td>{{assignment.rendu}}</td>
-    </tr>
-</table>
-<p>
-    
-
-</p>
-<mat-divider></mat-divider>
-<h3>Utilisation formulaire Meme Page</h3>
-<form ngForm #assignmentForm (submit)="onSubmit($event); assignmentForm.reset()" class="form">
-    <mat-form-field>
-        <input matInput [(ngModel)]="nomDevoir" placeholder="" name="nom" required>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Date de rendu</mat-label>
-        <input matInput [matDatepicker]="picker" 
-        [(ngModel)]="dateDeRendu"
-        name="date" required
-        >
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      
-
-    <button [disabled]="!ajoutActive" mat-stroked-button color="primary">
-      Ajouter un devoir
-    </button>
-</form>
-<mat-divider></mat-divider>
-<h3>Utilisation voir details Parent vers Enfant (input)</h3>
-<mat-list *ngFor="let assignment of assignements">
-    <h3 mat-subheader>{{assignment.datedeRendu | date:'dd/MM/yy'}}</h3> 
-    <mat-list-item (click)="onAssignmentClique(assignment)">
-    <p appRendu *ngIf="assignment.rendu; else nonsoumis">       
-        {{assignment.nom}} rendu {{assignment.rendu}}
-    </p>
-
-    <ng-template #nonsoumis>
-        {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
-    </ng-template>
-        
-    </mat-list-item>
+    <div *ngFor="let assignment of assignements">
+        <p *ngIf="assignment.rendu else nonrendu"> {{assignment.nom}} est rendu le {{assignment.datedeRendu}} rendu
+            {{assignment.rendu}}</p>
+        <ng-template #nonrendu>
+            {{assignment.nom}} a rendre le {{assignment.datedeRendu}} rendu {{assignment.rendu}}
+        </ng-template>
+    </div>
     <mat-divider></mat-divider>
-</mat-list>
-<p *ngIf="assingnmentSelectionner">{{assingnmentSelectionner.nom}}</p>
-
-<app-assignment-detail [assignmentDetail]="assingnmentSelectionner" (EventFils)="onDeleteAssignement($event)"></app-assignment-detail>
-
-<p>{{nomDevoir}}</p>
-
-<mat-divider></mat-divider>
-
-<h3>liste assignement via service</h3>
-<mat-list *ngFor="let assignment of assignementsServ">
-    <h3 mat-subheader>{{assignment.datedeRendu | date:'dd/MM/yy'}}</h3> 
-    <mat-list-item (click)="onAssignmentClique(assignment)">
-    <p appRendu *ngIf="assignment.rendu; else nonsoumis">       
-        {{assignment.nom}} rendu {{assignment.rendu}}
-    </p>
-
-    <ng-template #nonsoumis>
-        {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
-    </ng-template>
-        
-    </mat-list-item>
+    <h3>Utilisation du [ngstyle]</h3>
+    <div *ngFor="let assignment of assignements">
+        <p [ngStyle]="{color:assignment.rendu?'green':'red'}"> {{assignment.nom}} date de rendu
+            {{assignment.datedeRendu}} rendu {{assignment.rendu}}</p>
+    </div>
     <mat-divider></mat-divider>
-</mat-list>
+    <h3>Utilisation du [ngClass]</h3>
+    <div *ngFor="let assignment of assignements">
+        <p [ngClass]="{'rendu':assignment.rendu, 'nonRendu':!assignment.rendu}"> {{assignment.nom}} date de rendu
+            {{assignment.datedeRendu}} rendu {{assignment.rendu}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <h3>Utilisation directive avec *ngif</h3>
+    <div *ngFor="let assignment of assignements">
+        <p appRendu *ngIf="assignment.rendu; else nonsoumis"> {{assignment.nom}} date de rendu
+            {{assignment.datedeRendu}} rendu {{assignment.rendu}}</p>
+        <ng-template #nonsoumis>
+            {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
+        </ng-template>
+    </div>
+
+    <table>
+        <tr *ngFor="let assignment of assignements">
+            <td>{{assignment.nom}}</td>
+            <td>{{assignment.datedeRendu}}</td>
+            <td>{{assignment.rendu}}</td>
+        </tr>
+    </table>
+    <p>
+
+
+    </p>
+    <mat-divider></mat-divider>
+    <h3>Utilisation formulaire Meme Page</h3>
+    <form ngForm #assignmentForm (submit)="onSubmit($event); assignmentForm.reset()" class="form">
+        <mat-form-field>
+            <input matInput [(ngModel)]="nomDevoir" placeholder="" name="nom" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Date de rendu</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="dateDeRendu" name="date" required>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+
+        <button [disabled]="!ajoutActive" mat-stroked-button color="primary">
+            Ajouter un devoir
+        </button>
+    </form>
+    <mat-divider></mat-divider>
+    <h3>Utilisation voir details Parent vers Enfant (input)</h3>
+    <mat-list *ngFor="let assignment of assignements">
+        <h3 mat-subheader>{{assignment.datedeRendu | date:'dd/MM/yy'}}</h3>
+        <mat-list-item (click)="onAssignmentClique(assignment)">
+            <p appRendu *ngIf="assignment.rendu; else nonsoumis">
+                {{assignment.nom}} rendu {{assignment.rendu}}
+            </p>
+
+            <ng-template #nonsoumis>
+                {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
+            </ng-template>
+
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+    <p *ngIf="assingnmentSelectionner">{{assingnmentSelectionner.nom}}</p>
+
+    <app-assignment-detail [assignmentDetail]="assingnmentSelectionner"
+        (EventFils)="onDeleteAssignement($event)"></app-assignment-detail>
+
+    <p>{{nomDevoir}}</p>
+
+    <mat-divider></mat-divider>
+
+    <h3>liste assignement via service</h3>
+    <mat-list *ngFor="let assignment of assignementsServ">
+        <h3 mat-subheader>{{assignment.datedeRendu | date:'dd/MM/yy'}}</h3>
+        <mat-list-item (click)="onAssignmentClique(assignment)">
+            <p appRendu *ngIf="assignment.rendu; else nonsoumis">
+                {{assignment.nom}} rendu {{assignment.rendu}}
+            </p>
+
+            <ng-template #nonsoumis>
+                {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
+            </ng-template>
+
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+
+    <h3>liste assignement via service en utilisant la route</h3>
+    <mat-list *ngFor="let assignment of assignementsServ">
+        <a routerLink="/assignments/{{assignment.id}}">
+        <h3 mat-subheader>{{assignment.datedeRendu | date:'dd/MM/yy'}}</h3>
+        <mat-list-item (click)="onAssignmentClique(assignment)">
+            <p appRendu *ngIf="assignment.rendu; else nonsoumis">
+                {{assignment.nom}} rendu {{assignment.rendu}}
+            </p>
+
+            <ng-template #nonsoumis>
+                {{assignment.nom}} date limite {{assignment.datedeRendu}} rendu {{assignment.rendu}}
+            </ng-template>
+
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </a>
+    </mat-list>
 
 
 </main>
-
-

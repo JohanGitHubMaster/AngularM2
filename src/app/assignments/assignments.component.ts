@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Assignment } from './assignement.model';
 import { AssignementsService } from '../shared/assignements.service';
 
@@ -7,22 +7,25 @@ import { AssignementsService } from '../shared/assignements.service';
   templateUrl: './assignments.component.html',
   styleUrls: ['./assignments.component.css']
 })
-export class AssignmentsComponent {
+export class AssignmentsComponent implements OnInit{
   titre = "Liste des devoirs a rendre";
   c = "orange";
   assingnmentSelectionner!:Assignment;
   assignements:Assignment[] = [
     {
+      id:1,
       nom:"Devoir Angular de Mr Buffa",
       datedeRendu:new Date("2023-06-01"),
       rendu:false
     },
     {
+      id:2,
       nom:"Devoir Grails de Mr Galli",
       datedeRendu:new Date("2023-04-15"),
       rendu:true
     },
     {
+      id:3,
       nom:"Devoir Big Data de Mr Mopolo",
       datedeRendu:new Date("2023-04-01"),
       rendu:true
@@ -44,7 +47,7 @@ export class AssignmentsComponent {
     },2000)
     
     //ajout du service
-    this.assignmentsService.getAssignment().subscribe(assignements=>{
+    this.assignmentsService.getAssignments().subscribe(assignements=>{
       this.assignementsServ = assignements;
     });
   }

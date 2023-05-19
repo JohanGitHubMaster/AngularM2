@@ -20,10 +20,17 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import {Routes} from '@angular/router';
 import {RouterModule} from '@angular/router';
+import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
+import { authGuard, authUserGuard } from './shared/auth.guard';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { LoginComponent } from './login/login.component';
 
 const routes : Routes =[
-  {path:'',component:AssignmentsComponent},
-  {path:'home',component:AssignmentsComponent}
+  {path:'home',component:AssignmentsComponent,canActivate:[authUserGuard]},
+  {path:'add',component:AddAssignmentComponent},
+  {path:'assignments/:id',component:AssignmentDetailComponent},
+  {path:'assignments/edit/:id',component:EditAssignmentComponent,canActivate:[authGuard]},
+  {path:'',component:LoginComponent},
 ];
 @NgModule({
   declarations: [
@@ -31,7 +38,9 @@ const routes : Routes =[
     AssignmentsComponent,
     RenduDirective,
     AssignmentDetailComponent,
-    AddAssignmentComponent
+    AddAssignmentComponent,
+    EditAssignmentComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +56,7 @@ const routes : Routes =[
     MatListModule,
     MatCardModule,
     MatCheckboxModule,
+    MatSlideToggleModule,
     RouterModule.forRoot(routes),
 
   ],

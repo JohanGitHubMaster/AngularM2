@@ -10,23 +10,26 @@ export class AssignementsService {
 
   assignements:Assignment[] = [
     {
+      id:1,
       nom:"Devoir Angular de Mr Buffa",
       datedeRendu:new Date("2023-06-01"),
       rendu:false
     },
     {
+      id:2,
       nom:"Devoir Grails de Mr Galli",
       datedeRendu:new Date("2023-04-15"),
       rendu:true
     },
     {
+      id:3,
       nom:"Devoir Big Data de Mr Mopolo",
       datedeRendu:new Date("2023-04-01"),
       rendu:true
     }
   ]
 
-  getAssignment():Observable<Assignment[]>{
+  getAssignments():Observable<Assignment[]>{
     return of(this.assignements);
   }
 
@@ -50,6 +53,11 @@ export class AssignementsService {
       return of("Suppression fait ");
     }
     return of('supression echouer');
+  }
+
+  getAssignment(id:number):Observable<Assignment|undefined>{
+    let assignement:Assignment|undefined = this.assignements.find(a=>a.id===id);
+    return of(assignement);
   }
 
   constructor(private loggingService:LoggingService) { }
